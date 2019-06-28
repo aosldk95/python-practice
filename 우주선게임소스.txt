@@ -1,0 +1,42 @@
+
+class Scheduler:
+    
+    def __init__(self):
+        self.onTimer = None
+    
+    def update(self):
+        if self.onTimer != None:
+            self.onTimer()
+            
+    def setOnTimer(self, value):
+        self.onTimer = value
+
+class Ship:
+    
+    def update(self):
+        pass
+    
+class Astros:
+    
+    def update(self, x, y):
+        pass
+
+class Game:
+    
+    def __init__(self):
+        self.scheduler = Scheduler()
+        self.ship = Ship()
+        self.astros = Astros()
+        
+        self.scheduler.setOnTimer(self.on_timer)
+    
+    def start(self):
+        while True:
+            self.scheduler.update()
+            
+    def on_timer(self):
+        self.ship.update()
+        self.astros.update(0, 0) # TODO:
+        
+game = Game()
+game.start()

@@ -1,0 +1,46 @@
+import sliding_puzzle
+import rotary
+import button
+
+r = rotary.create(9, 10)
+bt = button.create(2)
+
+sliding_puzzle.show()
+
+for i in range(1000):
+    temp = random(4)
+    
+    if temp == 0:
+        sliding_puzzle.blank_left()
+    elif temp == 1:
+        sliding_puzzle.blank_right()
+    elif temp == 2:
+        sliding_puzzle.blank_up()
+    elif temp == 3:
+        sliding_puzzle.blank_down()
+
+VERT = -1
+HORI = 1
+
+direction = VERT
+
+
+while True:
+    if bt.is_clicked():
+        direction = direction * (-1)
+        
+    r.update()
+    
+    d = r.direction()
+    
+    if direction == VERT:
+        if d == -1:
+            sliding_puzzle.blank_left()
+        if d == 1:
+            sliding_puzzle.blank_right()
+    
+    if direction == HORI:
+        if d == -1:
+            sliding_puzzle.blank_down()
+        if d == 1:
+            sliding_puzzle.blank_up()

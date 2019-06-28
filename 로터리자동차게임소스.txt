@@ -1,0 +1,27 @@
+import car_race
+import rotary
+import utime
+        
+
+r = rotary.create(9,10)
+
+old_value = 0
+
+car_race.show()
+
+start_tick = utime.ticks_ms()
+
+while True:
+    r.update()
+    
+    term = r.value() - old_value
+    
+    car_race.move(term * 100)
+    
+    old_value = r.value()
+    
+    if car_race.is_finished():
+        break
+    
+term = utime.ticks_ms() - start_tick
+car_race.show_time(term // 1000)
